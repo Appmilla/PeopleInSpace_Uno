@@ -13,17 +13,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.iOS", "Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.UWP", "PeopleInSpace_Uno\PeopleInSpace_Uno.UWP\PeopleInSpace_Uno.UWP.csproj", "{AA31F9FE-9150-4AB6-9988-8DA2568D83B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.Wasm", "PeopleInSpace_Uno\PeopleInSpace_Uno.Wasm\PeopleInSpace_Uno.Wasm.csproj", "{B671EE3A-308E-43F8-9835-48D1B25E08D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleInSpace_Uno.Wasm", "PeopleInSpace_Uno\PeopleInSpace_Uno.Wasm\PeopleInSpace_Uno.Wasm.csproj", "{B671EE3A-308E-43F8-9835-48D1B25E08D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.macOS", "PeopleInSpace_Uno\PeopleInSpace_Uno.macOS\PeopleInSpace_Uno.macOS.csproj", "{FDAF8EB3-8D0C-41E4-B6AF-CAAE90602D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.Skia.Wpf.Host", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Wpf.Host\PeopleInSpace_Uno.Skia.Wpf.Host.csproj", "{EE45178C-1667-4268-9274-EC79D548AE03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleInSpace_Uno.Skia.Wpf.Host", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Wpf.Host\PeopleInSpace_Uno.Skia.Wpf.Host.csproj", "{EE45178C-1667-4268-9274-EC79D548AE03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.Skia.Wpf", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Wpf\PeopleInSpace_Uno.Skia.Wpf.csproj", "{612A0764-E733-46AF-966D-E20756CA782C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleInSpace_Uno.Skia.Wpf", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Wpf\PeopleInSpace_Uno.Skia.Wpf.csproj", "{612A0764-E733-46AF-966D-E20756CA782C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.Skia.Gtk", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Gtk\PeopleInSpace_Uno.Skia.Gtk.csproj", "{A21BC9F3-E679-4895-8263-381FE9863674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleInSpace_Uno.Skia.Gtk", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Gtk\PeopleInSpace_Uno.Skia.Gtk.csproj", "{A21BC9F3-E679-4895-8263-381FE9863674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleInSpace_Uno.Skia.Tizen", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Tizen\PeopleInSpace_Uno.Skia.Tizen.csproj", "{479B4EA0-580E-493A-B344-E0BB181DAEC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleInSpace_Uno.Skia.Tizen", "PeopleInSpace_Uno\PeopleInSpace_Uno.Skia.Tizen\PeopleInSpace_Uno.Skia.Tizen.csproj", "{479B4EA0-580E-493A-B344-E0BB181DAEC0}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -175,6 +175,7 @@ Global
 		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|ARM64.ActiveCfg = Debug|iPhoneSimulator
 		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|iPhone.Build.0 = Debug|iPhone
+		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{101D500F-C168-44B1-8617-0BCC64DB0923}.Debug|x64.ActiveCfg = Debug|iPhoneSimulator
