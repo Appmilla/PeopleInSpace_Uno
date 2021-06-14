@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>f96bf008-01d6-45f4-9ac9-c280ce3ff037</ProjectGuid>
+    <ProjectGuid>{F96BF008-01D6-45F4-9AC9-C280CE3FF037}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -59,6 +59,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="akavache">
+      <Version>7.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="ReactiveUI">
+      <Version>13.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="ReactiveUI.Fody">
+      <Version>13.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="ReactiveUI.Uno">
+      <Version>13.3.2</Version>
+    </PackageReference>
     <PackageReference Include="Uno.UI" Version="3.7.4" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="3.7.4" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.33" />
@@ -86,6 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PeopleInSpace_Uno.SharedFeatures\PeopleInSpace_Uno.SharedFeatures.csproj">
+      <Project>{1ca8836c-2e0b-4df4-9bf9-382c61d1605d}</Project>
+      <Name>PeopleInSpace_Uno.SharedFeatures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\PeopleInSpace_Uno.Shared\PeopleInSpace_Uno.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

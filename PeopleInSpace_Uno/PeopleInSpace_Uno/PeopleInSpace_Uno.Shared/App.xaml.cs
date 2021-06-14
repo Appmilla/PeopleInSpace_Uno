@@ -1,4 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
+using PeopleInSpace_Uno.SharedFeatures.Queries;
+using PeopleInSpace_Uno.SharedFeatures.Reactive;
+using PeopleInSpace_Uno.SharedFeatures.ViewModels;
+using ReactiveUI;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +20,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace PeopleInSpace_Uno
 {
@@ -40,9 +46,18 @@ namespace PeopleInSpace_Uno
 
             this.InitializeComponent();
 
+
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
 #endif
+
+            var locator = Locator.CurrentMutable;
+            locator.InitializeReactiveUI();
+            locator.Register<MainPageViewModel>(() => new MainPageViewModel());
+            locator.Register<ISchedulerProvider>(() => new SchedulerProvider());
+            locator.Register<IPeopleInSpaceQuery>(() => new PeopleInSpaceQuery());
+
+           
         }
 
         /// <summary>

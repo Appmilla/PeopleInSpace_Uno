@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PeopleInSpace_Uno.SharedFeatures.ViewModels;
+using Splat;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,8 +24,12 @@ namespace PeopleInSpace_Uno
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public MainPageViewModel ViewModel { get; set; }
+
         public MainPage()
         {
+            DataContext = ViewModel = Locator.Current.GetService<MainPageViewModel>();
+
             this.InitializeComponent();
         }
     }

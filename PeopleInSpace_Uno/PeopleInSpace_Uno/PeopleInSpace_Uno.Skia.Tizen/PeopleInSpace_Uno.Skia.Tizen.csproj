@@ -18,11 +18,18 @@
     <UpToDateCheckInput Include="..\PeopleInSpace_Uno.Shared\**\*.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="akavache" Version="7.3.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+    <PackageReference Include="ReactiveUI" Version="13.3.2" />
+    <PackageReference Include="ReactiveUI.Fody" Version="13.3.2" />
+    <PackageReference Include="ReactiveUI.Uno" Version="13.3.2" />
     <PackageReference Include="SkiaSharp.Views" Version="2.80.2" />
     <PackageReference Include="Uno.UI.Skia.Tizen" Version="3.7.4" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="3.7.4" Condition="'$(Configuration)'=='Debug'" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PeopleInSpace_Uno.SharedFeatures\PeopleInSpace_Uno.SharedFeatures.csproj" />
   </ItemGroup>
   <Import Project="..\PeopleInSpace_Uno.Shared\PeopleInSpace_Uno.Shared.projitems" Label="Shared" />
 </Project>
