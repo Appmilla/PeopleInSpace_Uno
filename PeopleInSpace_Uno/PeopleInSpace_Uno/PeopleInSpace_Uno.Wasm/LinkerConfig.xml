@@ -3,6 +3,9 @@
   <assembly fullname="Uno.UI" />
   <assembly fullname="Microsoft.Extensions.Options" />
 
+  <!-- See https://github.com/unoplatform/Uno.Wasm.Bootstrap#enable-the-debugger-support -->-->
+  <!-- Required for debugging -->
+  <assembly fullname="mscorlib" />
   <assembly fullname="System.Core">
 	<!-- This is required by JSon.NET and any expression.Compile caller -->
 	<type fullname="System.Linq.Expressions*" />
@@ -10,5 +13,30 @@
 
   <assembly fullname="ReactiveUI.Uno" />
   <assembly fullname="PeopleInSpace_Uno.SharedFeatures" />
+
   
+  <assembly fullname="Microsoft.Extensions.Hosting" />
+  <assembly fullname="Splat.Microsoft.Extensions.DependencyInjection" />
+  <assembly fullname="Microsoft.Extensions.Logging" />
+  <!--<assembly fullname="Splat.Microsoft.Extensions.Logging" />-->
+  <assembly fullname="Uno.Extensions.Logging.WebAssembly.Console" />
+  <assembly fullname="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+  <assembly fullname="Microsoft.Extensions.DependencyInjection" />
+  <assembly fullname="Microsoft.Extensions.Logging.Abstractions" />
+  <assembly fullname="Microsoft.Extensions.Options"/>
+   
+  <!--
+  <assembly fullname="Microsoft.Extensions.Logging.EventSource">
+    <type fullname="Microsoft.Extensions.Logging.EventSource.EventSourceLoggerProvider" />
+    <type fullname="Microsoft.Extensions.Logging.EventLogFiltersConfigureOptions" />
+    <type fullname="Microsoft.Extensions.Logging.EventLogFiltersConfigureOptionsChangeSource" />
+  </assembly>
+  -->
+  
+<!--
+  <assembly fullname="ReactiveUI" />
+  <assembly fullname="ReactiveUI.Fody" />
+
+  <assembly fullname="akavache" />
+  -->
 </linker>

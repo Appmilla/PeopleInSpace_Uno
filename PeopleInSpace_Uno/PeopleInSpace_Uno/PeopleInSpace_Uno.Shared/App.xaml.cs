@@ -1,13 +1,19 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.EventLog;
 using PeopleInSpace_Uno.SharedFeatures.Queries;
 using PeopleInSpace_Uno.SharedFeatures.Reactive;
 using PeopleInSpace_Uno.SharedFeatures.ViewModels;
 using ReactiveUI;
 using Splat;
+using Splat.Microsoft.Extensions.DependencyInjection;
+using Splat.Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -42,6 +48,8 @@ namespace PeopleInSpace_Uno
         /// </summary>
         public App()
         {
+            Initialize();
+
             InitializeLogging();
 
             this.InitializeComponent();
@@ -49,15 +57,122 @@ namespace PeopleInSpace_Uno
 
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
+#endif                      
+        }
+
+        public IServiceProvider ServiceProvider { get; private set; }
+
+        void Initialize()
+        {
+            var host = Host
+              .CreateDefaultBuilder()
+              .ConfigureAppConfiguration((hostingContext, config) =>
+              {
+                  config.Properties.Clear();
+                  config.Sources.Clear();
+                  hostingContext.Properties.Clear();
+
+                  //foreach (var fileProvider in config.Properties.Where(p => p.Value is PhysicalFileProvider).ToList())
+                  //  config.Properties.Remove(fileProvider);
+
+                  //IHostEnvironment hostingEnvironment = hostingContext.HostingEnvironment;
+                  //config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddJsonFile("appsettings." + hostingEnvironment.EnvironmentName + ".json", optional: true, reloadOnChange: true);
+
+
+                  //if (hostingEnvironment.IsDevelopment() && !string.IsNullOrEmpty(hostingEnvironment.ApplicationName))
+                  //{
+                  //  Assembly assembly = Assembly.Load(new AssemblyName(hostingEnvironment.ApplicationName));
+                  //  if (assembly != null)
+                  //  {
+                  //    config.AddUserSecrets(assembly, optional: true);
+                  //  }
+                  //}
+                  //config.AddEnvironmentVariables();          
+              })
+              .ConfigureServices(ConfigureServices)
+              .ConfigureLogging(loggingBuilder =>
+              {
+                  // remove loggers incompatible with UWP
+                  {
+                      var eventLoggers = loggingBuilder.Services
+                      .Where(l => l.ImplementationType == typeof(EventLogLoggerProvider))
+                      .ToList();
+
+                      foreach (var el in eventLoggers)
+                          loggingBuilder.Services.Remove(el);
+                  }
+
+                  //Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory.WithFilter(CreateFilterLoggerSettings());
+                  loggingBuilder
+                  .AddSplat()
+#if !__WASM__
+            .AddConsole()
+#else
+            .ClearProviders()            
 #endif
 
-            var locator = Locator.CurrentMutable;
-            locator.InitializeReactiveUI();
-            locator.Register<MainPageViewModel>(() => new MainPageViewModel());
-            locator.Register<ISchedulerProvider>(() => new SchedulerProvider());
-            locator.Register<IPeopleInSpaceQuery>(() => new PeopleInSpaceQuery());
+#if DEBUG
+            .SetMinimumLevel(LogLevel.Debug)
+#else
+            .SetMinimumLevel(LogLevel.Information)
+#endif
+            ;
 
+              })
+              .Build();
+
+            ServiceProvider = host.Services;
+            ServiceProvider.UseMicrosoftDependencyResolver();
+        }
+
+        void ConfigureServices(IServiceCollection services)
+        {
+            services.UseMicrosoftDependencyResolver();
+            var resolver = Splat.Locator.CurrentMutable;
+            resolver.InitializeSplat();
+            resolver.InitializeReactiveUI();
+
+            var allTypes = Assembly.GetExecutingAssembly()
+              .DefinedTypes
+              .Where(t => !t.IsAbstract);
            
+            // register services
+            {
+                services.AddSingleton<SchedulerProvider>();
+                services.AddSingleton<PeopleInSpaceQuery>();
+
+                services.AddSingleton<ISchedulerProvider, SchedulerProvider>(sp => sp.GetRequiredService<SchedulerProvider>());
+                services.AddSingleton<IPeopleInSpaceQuery, PeopleInSpaceQuery>(sp => sp.GetRequiredService<PeopleInSpaceQuery>());
+            }
+
+            // register view models
+            {
+                services.AddSingleton<MainPageViewModel>();
+                /*
+                services.AddSingleton<IScreen>(sp => sp.GetRequiredService<NavigationViewModel>());
+
+                var rvms = allTypes.Where(t => typeof(RoutableViewModel).IsAssignableFrom(t));
+                foreach (var rvm in rvms)
+                    services.AddTransient(rvm);
+                */
+            }
+
+            // register views
+            {
+                var vf = typeof(IViewFor<>);
+                bool isGenericIViewFor(Type ii) => ii.IsGenericType && ii.GetGenericTypeDefinition() == vf;
+                var views = allTypes
+                  .Where(t => t.ImplementedInterfaces.Any(isGenericIViewFor));
+
+                foreach (var v in views)
+                {
+                    var ii = v.ImplementedInterfaces.Single(isGenericIViewFor);
+
+                    services.AddTransient(ii, v);
+                    //Locator.CurrentMutable.Register(() => Locator.Current.GetService(v), ii, "Landscape");
+                }
+            }
+
         }
 
         /// <summary>
@@ -104,13 +219,16 @@ namespace PeopleInSpace_Uno
 #if !(NET5_0 && WINDOWS)
             if (e.PrelaunchActivated == false)
 #endif
-            {
+            {                
                 if (rootFrame.Content == null)
                 {
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    var vm = ServiceProvider.GetService<MainPageViewModel>();
+                    var view = ServiceProvider.GetRequiredService<IViewLocator>().ResolveView(vm);
+                    rootFrame.Content = view;
+                    rootFrame.DataContext = vm;
                 }
                 // Ensure the current window is active
                 _window.Activate();

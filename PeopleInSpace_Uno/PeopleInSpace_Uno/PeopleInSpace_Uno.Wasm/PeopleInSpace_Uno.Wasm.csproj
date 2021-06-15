@@ -54,4 +54,7 @@
     <ProjectReference Include="..\..\PeopleInSpace_Uno.SharedFeatures\PeopleInSpace_Uno.SharedFeatures.csproj" />
   </ItemGroup>
   <Import Project="..\PeopleInSpace_Uno.Shared\PeopleInSpace_Uno.Shared.projitems" Label="Shared" Condition="Exists('..\PeopleInSpace_Uno.Shared\PeopleInSpace_Uno.Shared.projitems')" />
+<PropertyGroup>
+    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+  </PropertyGroup>
 </Project>

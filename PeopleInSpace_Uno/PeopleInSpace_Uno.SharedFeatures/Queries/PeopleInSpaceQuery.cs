@@ -20,15 +20,17 @@ namespace PeopleInSpace_Uno.SharedFeatures.Queries
 
     public class PeopleInSpaceQuery : ReactiveObject, IPeopleInSpaceQuery
     {
-        ISchedulerProvider _schedulerProvider = Locator.Current.GetService<ISchedulerProvider>();
+        ISchedulerProvider _schedulerProvider;
 
         [Reactive]
         public bool IsBusy { get; set; }
 
         List<CrewModel> _crew = new List<CrewModel>();
 
-        public PeopleInSpaceQuery()
+        public PeopleInSpaceQuery(ISchedulerProvider schedulerProvider)
         {
+            _schedulerProvider = schedulerProvider;
+
             _crew.Add(new CrewModel
             {
                 Name = "Robert Behnken",

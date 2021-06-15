@@ -19,16 +19,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace PeopleInSpace_Uno
 {
+    public abstract partial class MainPageBase : ReactiveUI.Uno.ReactivePage<MainPageViewModel>
+    {
+    }
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : MainPageBase
     {
-        public MainPageViewModel ViewModel { get; set; }
+        //public MainPageViewModel ViewModel { get; set; }
 
         public MainPage()
         {
-            DataContext = ViewModel = Locator.Current.GetService<MainPageViewModel>();
+            //DataContext = ViewModel = Locator.Current.GetService<MainPageViewModel>();
 
             this.InitializeComponent();
         }

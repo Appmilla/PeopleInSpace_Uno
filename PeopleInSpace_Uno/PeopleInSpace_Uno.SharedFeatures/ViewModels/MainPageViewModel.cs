@@ -18,9 +18,9 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
 {
     public class MainPageViewModel : ReactiveObject
     {
-        ISchedulerProvider _schedulerProvider = Locator.Current.GetService<ISchedulerProvider>();
+        ISchedulerProvider _schedulerProvider;
 
-        IPeopleInSpaceQuery _peopleInSpaceQuery = Locator.Current.GetService<IPeopleInSpaceQuery>();
+        IPeopleInSpaceQuery _peopleInSpaceQuery;
 
         [Reactive]
         public string Greeting { get; set; }
@@ -48,8 +48,12 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
         readonly SourceCache<CrewModel, string> _crewCache = new SourceCache<CrewModel, string>(KeySelector);
 
 
-        public MainPageViewModel()
+        public MainPageViewModel(ISchedulerProvider schedulerProvider,
+            IPeopleInSpaceQuery peopleInSpaceQuery)
         {
+            _schedulerProvider = schedulerProvider;
+            _peopleInSpaceQuery = peopleInSpaceQuery;
+
             Greeting = "Hello mate";
 
             this.WhenAnyValue(x => x._peopleInSpaceQuery.IsBusy)
