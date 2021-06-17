@@ -1,4 +1,5 @@
 ﻿using DynamicData;
+using DynamicData.Binding;
 using PeopleInSpace_Uno.SharedFeatures.Models;
 using PeopleInSpace_Uno.SharedFeatures.Queries;
 using PeopleInSpace_Uno.SharedFeatures.Reactive;
@@ -25,11 +26,7 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
         [Reactive]
         public string Greeting { get; set; }
 
-        /*
-        [Reactive]
-        public bool IsRefreshing { get; set; }
-        */
-
+       
         [ObservableAsProperty]
         // ReSharper disable once UnassignedGetOnlyAutoProperty
         public bool IsBusy { get; }
@@ -82,7 +79,11 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
             RefreshCommand.ThrownExceptions.Subscribe(Crew_OnError);
             RefreshCommand.Subscribe(Crew_OnNext);
 
+            var crewSort = SortExpressionComparer<CrewModel>
+                .Ascending(c => c.Name);
+
             _ = _crewCache.Connect()
+                .Sort(crewSort)
                 .Bind(out _crew)
                 .ObserveOn(_schedulerProvider.MainThread)        //ensure operation is on the UI thread;
                 .DisposeMany()                              //automatic disposal

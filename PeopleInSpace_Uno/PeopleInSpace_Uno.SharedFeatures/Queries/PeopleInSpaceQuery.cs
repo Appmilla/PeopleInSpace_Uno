@@ -1,12 +1,12 @@
-﻿using PeopleInSpace_Uno.SharedFeatures.Models;
+﻿using PeopleInSpace_Uno.SharedFeatures.Apis;
+using PeopleInSpace_Uno.SharedFeatures.Models;
 using PeopleInSpace_Uno.SharedFeatures.Reactive;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Splat;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PeopleInSpace_Uno.SharedFeatures.Queries
@@ -20,17 +20,21 @@ namespace PeopleInSpace_Uno.SharedFeatures.Queries
 
     public class PeopleInSpaceQuery : ReactiveObject, IPeopleInSpaceQuery
     {
-        ISchedulerProvider _schedulerProvider;
+        readonly ISchedulerProvider _schedulerProvider;
+        readonly ISpaceXApi _spaceXApi;
 
         [Reactive]
         public bool IsBusy { get; set; }
 
         List<CrewModel> _crew = new List<CrewModel>();
 
-        public PeopleInSpaceQuery(ISchedulerProvider schedulerProvider)
+        public PeopleInSpaceQuery(ISchedulerProvider schedulerProvider,
+            ISpaceXApi spaceXApi)
         {
             _schedulerProvider = schedulerProvider;
+            _spaceXApi = spaceXApi;
 
+            /*
             _crew.Add(new CrewModel
             {
                 Name = "Robert Behnken",
@@ -51,6 +55,7 @@ namespace PeopleInSpace_Uno.SharedFeatures.Queries
                 Status = Status.Active,
                 Id = "5ebf1a6e23a9a60006e03a7a"
             });
+            */
         }
 
         public IObservable<ICollection<CrewModel>> GetCrew(bool forceRefresh = false)
@@ -68,8 +73,10 @@ namespace PeopleInSpace_Uno.SharedFeatures.Queries
         {
             IsBusy = true;
 
-            await Task.Delay(500).ConfigureAwait(false);
-            
+            var crewJson = await  _spaceXApi.GetAllCrew().ConfigureAwait(false);
+
+            _crew = CrewModel.FromJson(crewJson).ToList();
+                        
             IsBusy = false;
 
             return _crew;

@@ -14,10 +14,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-		<TextBlock Grid.Row="0" Text="{Binding Greeting}" Margin="20" FontSize="30" />
-        <Button Grid.Row="1" Command="{Binding RefreshCommand}">Refresh</Button>
+		<TextBlock Grid.Row="0"
+                   Text="{Binding Greeting}"
+                   Margin="20"
+                   FontSize="30" />
+        <Button Grid.Row="1"
+                Command="{Binding RefreshCommand}">Refresh</Button>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Crew}">
+        <ListView Grid.Row="2"
+                  ItemsSource="{Binding Crew}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">

@@ -2,10 +2,12 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.EventLog;
+using PeopleInSpace_Uno.SharedFeatures.Apis;
 using PeopleInSpace_Uno.SharedFeatures.Queries;
 using PeopleInSpace_Uno.SharedFeatures.Reactive;
 using PeopleInSpace_Uno.SharedFeatures.ViewModels;
 using ReactiveUI;
+using Refit;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
 using Splat.Microsoft.Extensions.Logging;
@@ -138,11 +140,23 @@ namespace PeopleInSpace_Uno
            
             // register services
             {
-                services.AddSingleton<SchedulerProvider>();
-                services.AddSingleton<PeopleInSpaceQuery>();
+                services.AddSingleton<ISchedulerProvider, SchedulerProvider>();
+                services.AddSingleton<IPeopleInSpaceQuery, PeopleInSpaceQuery>();
 
-                services.AddSingleton<ISchedulerProvider, SchedulerProvider>(sp => sp.GetRequiredService<SchedulerProvider>());
-                services.AddSingleton<IPeopleInSpaceQuery, PeopleInSpaceQuery>(sp => sp.GetRequiredService<PeopleInSpaceQuery>());
+                //https://api.spacexdata.com/v4
+                //ISpaceXApi              
+#if __WASM__
+                services.AddRefitClient<ISpaceXApi>()
+                    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.spacexdata.com/v4"))
+                    .ConfigurePrimaryHttpMessageHandler(h => new Uno.UI.Wasm.WasmHttpHandler());
+                
+    
+#else
+                //var settings = new RefitSettings();
+                services.AddRefitClient<ISpaceXApi>(/*settings*/)
+                        .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.spacexdata.com/v4"));
+#endif
+
             }
 
             // register view models
