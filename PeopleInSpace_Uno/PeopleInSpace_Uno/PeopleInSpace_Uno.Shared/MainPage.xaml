@@ -17,7 +17,8 @@
         </ResourceDictionary>
     </local:MainPageBase.Resources>
     <!-- Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
-    <Grid Background="#35B8FF">
+    <Grid toolkit:VisibleBoundsPadding.PaddingMask="All"
+          Background="#35B8FF">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -76,13 +77,13 @@
 					               Source="{Binding Image}" />
                             <TextBlock Grid.Column="1"
                                        Grid.Row="0"
-                                       Margin="10,10,10,10"
+                                       Margin="0,10,10,10"
                                        FontWeight="SemiBold"
                                        FontSize="18"
                                        Text="{Binding Name}"/>
                             <TextBlock Grid.Column="1"
                                        Grid.Row="1"
-                                       Margin="10,10,10,10"
+                                       Margin="0,10,10,10"
                                        FontWeight="Normal"
                                        FontSize="16"
                                        Text="{Binding AgencyString}"/>
