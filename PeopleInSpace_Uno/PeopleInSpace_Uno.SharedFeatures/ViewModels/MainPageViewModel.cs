@@ -51,7 +51,7 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
             _schedulerProvider = schedulerProvider;
             _peopleInSpaceQuery = peopleInSpaceQuery;
 
-            Greeting = "Hello mate";
+            Greeting = "People In Space";
 
             this.WhenAnyValue(x => x._peopleInSpaceQuery.IsBusy)
                 .ObserveOn(_schedulerProvider.MainThread)

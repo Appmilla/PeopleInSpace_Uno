@@ -27,6 +27,8 @@ namespace PeopleInSpace_Uno.SharedFeatures.Models
 
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        public string AgencyString => Agency.ToString();
     }
 
     public enum Agency { Esa, Jaxa, Nasa, SpaceX };
