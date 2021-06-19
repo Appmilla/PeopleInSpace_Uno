@@ -5,15 +5,12 @@ using PeopleInSpace_Uno.SharedFeatures.Queries;
 using PeopleInSpace_Uno.SharedFeatures.Reactive;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Text;
 
 namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
 {
@@ -56,22 +53,7 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
             this.WhenAnyValue(x => x._peopleInSpaceQuery.IsBusy)
                 .ObserveOn(_schedulerProvider.MainThread)
                 .ToPropertyEx(this, x => x.IsBusy, scheduler: _schedulerProvider.MainThread);
-
-            /*
-            RefreshCommand = ReactiveCommand.CreateFromObservable<Unit, ICollection<CrewModel>>(
-                _ => _peopleInSpaceQuery.GetCrew(false),
-                outputScheduler: RxApp.MainThreadScheduler);
-            */
-
-
-            /*
-            RefreshCommand
-                .IsExecuting
-                .Where(isExecuting => !isExecuting)
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .BindTo(this, x => x.IsBusy);
-            */
-
+           
             RefreshCommand = ReactiveCommand.CreateFromObservable(
                 () => _peopleInSpaceQuery.GetCrew(false),
                 //this.WhenAnyValue(x => x.IsBusy).Select(x => !x),
@@ -88,8 +70,6 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
                 .ObserveOn(_schedulerProvider.MainThread)        //ensure operation is on the UI thread;
                 .DisposeMany()                              //automatic disposal
                 .Subscribe();
-
-
         }
 
         void Crew_OnNext(ICollection<CrewModel> crew)
