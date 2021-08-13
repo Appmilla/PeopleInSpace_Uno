@@ -13,7 +13,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 
 namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
-{
+{    
     public class MainPageViewModel : ReactiveObject
     {
         ISchedulerProvider _schedulerProvider;
@@ -100,5 +100,5 @@ namespace PeopleInSpace_Uno.SharedFeatures.ViewModels
         {
             
         }
-    }
+    }    
 }
