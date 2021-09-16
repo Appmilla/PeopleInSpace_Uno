@@ -12,13 +12,20 @@
 
     <local:MainPageBase.Resources>
         <ResourceDictionary>
-            <Style x:Key="ListViewItemStretchStyle" TargetType="ListViewItem">
+            <Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             </Style>
 
             <Color x:Key="Blue-01">#FF0078D7</Color>
             <SolidColorBrush x:Key="Brush-Blue-01"
                              Color="{StaticResource Blue-01}" />
+
+            <Style x:Key="DemoListDetailsViewStyle"
+                   TargetType="controls:ListDetailsView">
+                <Setter Property="Background" Value="#35B8FF"/>
+                <Setter Property="Padding" Value="10,10,10,10"/>
+            </Style>
+                      
         </ResourceDictionary>
     </local:MainPageBase.Resources>
 
@@ -34,7 +41,7 @@
                               Margin="20,20,20,20"
                               Padding="10,10,10,10"
                               HorizontalAlignment="Stretch">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
                 <TextBlock 
                        HorizontalAlignment="Center"
                        Text="{Binding Greeting}"
@@ -47,20 +54,21 @@
             </StackPanel>
 
         </toolkit:ElevatedView>
-        <!--ItemContainerStyle="{StaticResource ListViewItemStretchStyle}"-->
+       
         <controls:ListDetailsView Grid.Row="1"
+                                  Style="{StaticResource DemoListDetailsViewStyle}"
                                   BackButtonBehavior="Automatic" 
                                   ItemsSource="{Binding Crew}"
-                                  NoSelectionContent="Select an item to view"
-                                  CompactModeThresholdWidth="720"
-                                  Background="#35B8FF">
+                                  NoSelectionContent="Select an astronaut to view"
+                                  CompactModeThresholdWidth="720">
             <controls:ListDetailsView.ItemTemplate>
                 <DataTemplate>
                     <toolkit:ElevatedView Background="White"
                                           Elevation="30"
                                           CornerRadius="15"
                                           Margin="5,5,5,5"
-                                          HorizontalAlignment="Stretch">
+                                          HorizontalAlignment="Stretch"
+                                          HorizontalContentAlignment="Stretch">
                         <Grid Padding="5,5,5,5" 
                               Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                             <Grid.RowDefinitions>
@@ -101,6 +109,7 @@
             </controls:ListDetailsView.ItemTemplate>
             <controls:ListDetailsView.DetailsTemplate>
                 <DataTemplate>
+                    <ScrollViewer>
                     <Grid Padding="10,10,10,10"
                           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                         <Grid.RowDefinitions>
@@ -150,13 +159,14 @@
 					             VerticalAlignment="Stretch"
                                  Source="{Binding Wikipedia}"/>-->
                     </Grid>
+                    </ScrollViewer>
                 </DataTemplate>
             </controls:ListDetailsView.DetailsTemplate>
             <controls:ListDetailsView.NoSelectionContentTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center" 
                                 VerticalAlignment="Center">
-                        <SymbolIcon Symbol="Mail" 
+                        <SymbolIcon Symbol="Contact" 
                                     RenderTransformOrigin=".5,.5">
                             <SymbolIcon.RenderTransform>
                                 <CompositeTransform 

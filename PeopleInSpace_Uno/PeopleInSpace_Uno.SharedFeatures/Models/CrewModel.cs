@@ -33,7 +33,7 @@ namespace PeopleInSpace_Uno.SharedFeatures.Models
 
     public enum Agency { Esa, Jaxa, Nasa, SpaceX };
 
-    public enum Launch { The5Eb87D46Ffd86E000604B388, The5Eb87D4Dffd86E000604B38E, The5Fe3Af58B3467846B324215F };
+    public enum Launch { The5Eb87D46Ffd86E000604B388, The5Eb87D4Dffd86E000604B38E, The5Fe3Af58B3467846B324215F, The607a37565a906a44023e0866 };
 
     public enum Status { Active, Inactive, Retired, Unknown };
 
@@ -130,6 +130,8 @@ namespace PeopleInSpace_Uno.SharedFeatures.Models
                     return Launch.The5Eb87D4Dffd86E000604B38E;
                 case "5fe3af58b3467846b324215f":
                     return Launch.The5Fe3Af58B3467846B324215F;
+                case "607a37565a906a44023e0866":
+                    return Launch.The607a37565a906a44023e0866;
             }
             throw new Exception("Cannot unmarshal type Launch");
         }
@@ -152,6 +154,9 @@ namespace PeopleInSpace_Uno.SharedFeatures.Models
                     return;
                 case Launch.The5Fe3Af58B3467846B324215F:
                     serializer.Serialize(writer, "5fe3af58b3467846b324215f");
+                    return;
+                case Launch.The607a37565a906a44023e0866:
+                    serializer.Serialize(writer, "607a37565a906a44023e0866");
                     return;
             }
             throw new Exception("Cannot marshal type Launch");
