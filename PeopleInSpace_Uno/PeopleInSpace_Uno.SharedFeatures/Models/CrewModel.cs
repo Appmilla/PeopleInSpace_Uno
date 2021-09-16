@@ -35,7 +35,7 @@ namespace PeopleInSpace_Uno.SharedFeatures.Models
 
     public enum Launch { The5Eb87D46Ffd86E000604B388, The5Eb87D4Dffd86E000604B38E, The5Fe3Af58B3467846B324215F };
 
-    public enum Status { Active };
+    public enum Status { Active, Inactive, Retired, Unknown };
 
     public partial class CrewModel
     {

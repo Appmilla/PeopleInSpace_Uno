@@ -1,9 +1,12 @@
 ﻿using PeopleInSpace_Uno.SharedFeatures.ViewModels;
+using ReactiveUI;
 using Splat;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,13 +31,25 @@ namespace PeopleInSpace_Uno
     /// </summary>
     public sealed partial class MainPage : MainPageBase
     {
-        //public MainPageViewModel ViewModel { get; set; }
+        public MainPageViewModel ViewModel { get; set; }
 
         public MainPage()
         {
-            //DataContext = ViewModel = Locator.Current.GetService<MainPageViewModel>();
+            DataContext = ViewModel = Locator.Current.GetService<MainPageViewModel>();
 
             this.InitializeComponent();
+
+            //Observable.Return(Unit.Default).InvokeCommand(ViewModel.RefreshCommand);
+            //ViewModel.RefreshCommand.Execute();
         }
+
+        /*
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ViewModel.RefreshCommand.Execute();
+
+            base.OnNavigatedTo(e);
+        }
+        */
     }
 }
