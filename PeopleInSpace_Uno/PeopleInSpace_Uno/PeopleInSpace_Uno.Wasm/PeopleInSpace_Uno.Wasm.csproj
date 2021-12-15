@@ -39,17 +39,19 @@
     <PackageReference Include="akavache" Version="7.3.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="ReactiveUI" Version="13.3.2" />
-    <PackageReference Include="ReactiveUI.Fody" Version="13.3.2" />
-    <PackageReference Include="ReactiveUI.Uno" Version="13.3.2" />
-    <PackageReference Include="Refit" Version="6.0.38" />
-    <PackageReference Include="Refit.HttpClientFactory" Version="6.0.38" />
-    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="11.1.1" />
-    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="11.1.1" />
+    <PackageReference Include="ReactiveUI" Version="14.2.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="14.2.1" />
+    <PackageReference Include="ReactiveUI.Uno" Version="14.2.1" />
+    <PackageReference Include="Refit" Version="6.0.94" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.0.94" />
+    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="12.1.4" />
+    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="12.1.4" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="3.8.6" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.8.6" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls" Version="7.0.0" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.Layout" Version="7.0.0" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="3.9.7" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.9.7" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="2.1.0" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="2.1.0" />
   </ItemGroup>

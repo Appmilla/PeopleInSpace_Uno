@@ -1,7 +1,9 @@
 # PeopleInSpace_Uno
 People in space using Uno Platform
 
-This demo presents a list of people in space, using this Api https://github.com/r-spacex/SpaceX-API/tree/master/docs/v4. This demo was inspired by John O'Reilly's Kotlin Muliplatform Mobile (KMM) sample https://github.com/joreilly/PeopleInSpace.
+This demo presents a list of people in space, using this Api https://github.com/r-spacex/SpaceX-API. This demo was inspired by John O'Reilly's Kotlin Muliplatform Mobile (KMM) sample https://github.com/joreilly/PeopleInSpace.
+
+A video demonstration of this is available here https://www.loom.com/share/f962103765ea4b4593c02fdd3cfab983
 
 The Uno Platform documentation is a great resource, start here https://platform.uno/docs/articles/getting-started-tutorial-1.html.
 
